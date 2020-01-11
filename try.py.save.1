@@ -1,0 +1,23 @@
+import csv
+import MySQLdb
+
+db= MySQLdb.connect(host='localhost',
+    user='root',
+    db='celebal')
+cursor =db.cursor()
+
+#cursor.execute("CREATE DATABASE mydataaa")
+#cursor.execute("CREATE TABLE data1 (ID int(255) PRIMARY KEY, Cities varchar(255),Pincode int(255),Office_ID varchar(255))")
+csv_data1 = csv.reader(('dataset1.csv'), delimiter=',')
+#dataset1 = csv.reader('dataset1.csv')
+count = 0
+for row in csv_data1:
+        if count < 1:
+            continue
+        else:
+            cursor.execute ("INSERT INTO data1(ID,Cities,Pincode,Office_ID) VALUES(%s, %s, %s, %s)",row)
+        
+
+count+=1
+cursor.close()
+print("Done")
